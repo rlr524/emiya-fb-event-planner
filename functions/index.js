@@ -2,10 +2,11 @@
 
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
+require("dotenv").config();
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-	apiKey: "AIzaSyBsW6uczsHN7KKR5-_o5aQq4-HxI8f3KpY",
+	apiKey: process.env.API_KEY,
 	authDomain: "emiya-fb-event-planner.firebaseapp.com",
 	databaseURL: "https://emiya-fb-event-planner-default-rtdb.firebaseio.com",
 	projectId: "emiya-fb-event-planner",
@@ -137,12 +138,10 @@ app.get("/api/message/:messageId", async (req, res) => {
 			.once("value");
 
 		if (!snapshot.exists()) {
-			return res
-				.status(404)
-				.json({
-					errorCode: 404,
-					errorMessage: `message '${messageId}' not found`,
-				});
+			return res.status(404).json({
+				errorCode: 404,
+				errorMessage: `message '${messageId}' not found`,
+			});
 		}
 		res.set("Cache-Control", "private, max-age=300");
 		return res.status(200).json(snapshot.val());

@@ -1,11 +1,25 @@
 {
-	"firestore": {
-		"rules": "firestore.rules",
-		"indexes": "firestore.indexes.json"
-	},
-	"emulators": {
-		"firestore": {
-			"port": 3000
-		}
-	}
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "emulators": {
+    "firestore": {
+      "port": 3000
+    },
+    "functions": {
+      "port": 5001
+    },
+    "ui": {
+      "enabled": true
+    }
+  },
+  "hosting": {
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
 }

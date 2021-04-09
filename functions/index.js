@@ -26,27 +26,27 @@ const eventsCollection = "events";
 const express = require("express");
 const app = express();
 
-const authenticate = async (req, res, next) => {
-	if (
-		!req.headers.authorization ||
-		!req.headers.authorization.startsWith("Bearer ")
-	) {
-		res.status(403).send("Unauthorized");
-		return;
-	}
-	const idToken = req.headers.authorization.split("Bearer ")[1];
-	try {
-		const decodedIdToken = await admin.auth().verifyIdToken(idToken);
-		req.user = decodedIdToken;
-		next();
-		return;
-	} catch (error) {
-		res.status(403).send("Unauthorized");
-		return;
-	}
-};
+// const authenticate = async (req, res, next) => {
+// 	if (
+// 		!req.headers.authorization ||
+// 		!req.headers.authorization.startsWith("Bearer ")
+// 	) {
+// 		res.status(403).send("Unauthorized");
+// 		return;
+// 	}
+// 	const idToken = req.headers.authorization.split("Bearer ")[1];
+// 	try {
+// 		const decodedIdToken = await admin.auth().verifyIdToken(idToken);
+// 		req.user = decodedIdToken;
+// 		next();
+// 		return;
+// 	} catch (error) {
+// 		res.status(403).send("Unauthorized");
+// 		return;
+// 	}
+// };
 
-app.use(authenticate);
+// app.use(authenticate);
 
 app.get("/events", async (req, res) => {
 	try {

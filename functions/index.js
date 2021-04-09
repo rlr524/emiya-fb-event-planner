@@ -16,10 +16,7 @@ const firebaseConfig = {
 	measurementId: "G-B7C2M48WRV",
 };
 
-admin.initializeApp({
-	credential: admin.credential.applicationDefault(),
-	databaseURL: firebaseConfig.databaseURL,
-});
+admin.initializeApp(functions.config().firebase);
 
 const db = admin.firestore();
 const eventsCollection = "events";
